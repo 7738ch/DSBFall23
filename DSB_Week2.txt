@@ -1,0 +1,45 @@
+#1
+SELECT date, 
+COUNT(order_id) as order_number
+FROM sales
+WHERE date = "03-18-2023"
+
+#2
+SELECT date, 
+COUNT(order_id) as order_number,
+first_name,
+last_name
+FROM sales JOIN customers
+ON sales.customer_id = customers.customer_id
+WHERE date = "03-18-2023" AND first_name = "John" AND last_name = "Doe"
+
+#3
+SELECT COUNT(customer_id) as customer_number,
+SUM(revenue)/customer_number as avg_per_customer
+FROM sales
+WHERE CAST(date AS string)
+LIKE "01-%-2023"
+
+#4
+SELECT department,
+SUM(revenue) as rev
+FROM sales JOIN items
+ON sales.item_id =  items.item_id
+WHERE rev < 600 AND CAST(date AS string)
+LIKE "%-%-2022"
+
+#5
+SELECT order_id
+MIN(revenue),
+MAX(revenue),
+FROM sales
+
+#6
+SELECT order_id,
+MAX(revenue),
+item_name
+FROM sales JOIN items
+ON sales.item_id = item.item_id
+
+
+
